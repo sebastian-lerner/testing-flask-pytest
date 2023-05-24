@@ -1,34 +1,19 @@
 version: 2.1
+setup: true
 orbs:
-  python: circleci/python@2.1.1
-
-parameters:
-  rerun-failed:
-    type: boolean
-    default: false
+  continuation: circleci/continuation@0.1.2
 
 jobs:
-  build-and-test:
-    parallelism: 3
-    resource_class: small
-    docker:
-      - image: cimg/python:3.11.0
+  generate_config:
+    executor: continuation/default # does this contain the circleci cli?
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      - run:
-          name: Run tests
-          command: | 
-                  pytest --collect-only -q | grep -e "\.py" | circleci tests run --command="xargs pytest -o" --verbose --split-by=timings
+      - command: |
+            ./generate-config > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml # use newly generated config to continue
 
-      #        mkdir test-results
-              #  TEST_FILES=$(circleci tests glob "**/test_*.py")
-              #  pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
-#      - store_test_results:
-#            path: test-results
-          #junit_family=legacy --junitxml=test-results/junit.xml
 workflows:
-  sample:
+  setup:
     jobs:
-      - build-and-test
+      - generate_config
