@@ -7,8 +7,10 @@ jobs:
   generate_config:
     executor: continuation/default # does this contain the circleci cli?
     steps:
-      - checkout
-      - command: |
+      - run: # run a command
+          name: Generate config
+          command: |
+            echo circleci --help
             ./generate-config > generated_config.yml
       - continuation/continue:
           configuration_path: generated_config.yml # use newly generated config to continue
