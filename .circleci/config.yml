@@ -42,4 +42,4 @@ workflows:
   sample:
     jobs:
       #- build-and-test
-      - test-gpu
+      - test-gpu #test
