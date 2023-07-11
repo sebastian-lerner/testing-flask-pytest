@@ -31,10 +31,11 @@ jobs:
           command: pytest -o junit_family=legacy --junitxml=test-results/junit.xml
       - store_test_results:
             path: test-results
-  test-gpu:
-    machine:
-      image: ubuntu-2004:2023.04.2
-    resource_class: medium
+
+  build:
+    docker:
+      - image: cimg/base:2023.06
+    resource_class: arm-large
     steps:
       - run: echo "hello, world"
           
@@ -42,4 +43,4 @@ workflows:
   sample:
     jobs:
       #- build-and-test
-      - test-gpu #test
+      - build
