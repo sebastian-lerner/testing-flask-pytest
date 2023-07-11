@@ -34,7 +34,7 @@ jobs:
 
   build:
     docker:
-      - image: cimg/base:2023.06
+      - image: cimg/python:3.11.4
     resource_class: arm-large
     steps:
       - run: echo "hello, world"
