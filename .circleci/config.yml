@@ -37,6 +37,10 @@ jobs:
       - image: cimg/base:2023.07
     resource_class: large
     steps:
+      - run: sudo npm install -g npm@latest
+      - node/install-packages:
+          cache-path: ~/project/node_modules
+          override-ci-command: npm install
       - run: npm install --save-dev jest
       - run: jest --help
           
