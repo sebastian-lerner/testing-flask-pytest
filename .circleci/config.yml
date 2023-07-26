@@ -41,9 +41,20 @@ jobs:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
       - run: jest --help
+
+
+  step-example:
+    resource_class: small
+    docker:
+      - image: cimg/python:3.11.0
+    steps:
+      - checkout
+      - run:
+          command: echo "this is a clickable link https://circleci.com"
           
 workflows:
   sample:
     jobs:
       #- build-and-test
-      - node/run
+      #- node/run
+      - step-example
