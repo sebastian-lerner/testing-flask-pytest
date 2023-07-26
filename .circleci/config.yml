@@ -50,7 +50,9 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo "this is a clickable link https://circleci.com "
+          command: echo "this is a clickable link https://circleci.com " |
+          echo "printf("\033[31;1;4mHello\033[0m");
+"
           
 workflows:
   sample:
