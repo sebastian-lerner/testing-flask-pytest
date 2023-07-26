@@ -52,7 +52,7 @@ jobs:
       - run:
           command: echo "this is a clickable link https://circleci.com"
       - run:
-          command: echo "ansci escape codes \033[31;1;4mHello\033[0m"
+          command: echo -e "ansci escape codes \033[31;1;4mHello\033[0m"
           
 workflows:
   sample:
