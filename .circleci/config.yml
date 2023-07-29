@@ -46,7 +46,7 @@ jobs:
   step-example:
     resource_class: arm-medium
     docker:
-      - image: cimg/python:3.11.0
+      - image: cimg/base:2023.07
     steps:
       - checkout
       - run:
